@@ -6,22 +6,29 @@ app.get('/html/01_form.htm', function (req, res) {
  res.sendFile( __dirname + "/" + "01_form.htm" );
 })
 
+/* on utilise le module «body-parser» pour traiter le formulaire transmis par POST */
+var bodyParser = require('body-parser');
+
+// Créer le parser « application/x-www-form-urlencoded » 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 app.get('/', (req, res) => {
  console.log('accueil')
  res.end('<h1>Accueil</h1>')
 })
 
-app.get('/traiter_get', function (req, res) {
+app.post('/traiter_post', urlencodedParser, function (req, res) {
  // Preparer l'output en format JSON
 
-console.log('la route /traiter_get')
+console.log('la route /traiter_post')
 
-// on utilise l'objet req.query pour récupérer les données GET
+// on utilise l'objet req.body pour récupérer les données POST
  reponse = {
- prenom:req.query.prenom,
- nom:req.query.nom,
- telephone:req.query.telephone,
- courriel:req.query.courriel
+ prenom:req.body.prenom,
+ nom:req.body.nom,
+ telephone:req.body.telephone,
+ courriel:req.body.courriel,
+ lamethode: "POST"
  };
 console.log(reponse);
  res.end(JSON.stringify(reponse));
