@@ -8,6 +8,10 @@ app.get('/formulaire', function (req, res) {
  res.sendFile( __dirname + "/" + "public" + "/" + "html" + "/" + "01_form.htm" );
 })
 
+/* on associe le moteur de vue au module «ejs» */
+
+app.set('view engine', 'ejs'); // générateur de template
+
 /* on utilise le module «body-parser» pour traiter le formulaire transmis par POST */
 var bodyParser = require('body-parser');
 
@@ -19,10 +23,10 @@ app.get('/', (req, res) => {
  res.end('<h1>Accueil</h1>')
 })
 
-app.post('/traiter_post', urlencodedParser, function (req, res) {
+app.post('/formulaire', urlencodedParser, function (req, res) {
  // Preparer l'output en format JSON
 
-console.log('la route /traiter_post')
+console.log('la route /formulaire')
 
 // on utilise l'objet req.body pour récupérer les données POST
  reponse = {
