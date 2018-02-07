@@ -5,7 +5,19 @@ const app = express();
 app.use(express.static('public'));
 app.get('/formulaire', function (req, res) {
  console.log(__dirname);
- res.sendFile( __dirname + "/" + "public" + "/" + "html" + "/" + "01_form.htm" );
+ res.sendFile( __dirname + "/public/html/01_form.htm" );
+})
+
+/* La route /membres permet d'afficher l'ensemble des adresses */ 
+
+app.get('/membres', (req, res) => { 
+    fs.readFile( __dirname + "/public/data/" + "adresses.json", 
+        'utf8',
+        (err, data) => {if (err) { return console.error(err);}
+        console.log( data );
+        let resultat = JSON.parse(data);           
+  res.render('template_0.ejs', {adresses: resultat})  
+  });
 })
 
 /* on associe le moteur de vue au module «ejs» */
