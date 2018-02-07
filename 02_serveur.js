@@ -1,9 +1,11 @@
+ "use strict";
+const fs = require("fs");
 const express = require('express');
 const app = express();
 app.use(express.static('public'));
-app.get('/html/01_form.htm', function (req, res) {
+app.get('/formulaire', function (req, res) {
  console.log(__dirname);
- res.sendFile( __dirname + "/" + "01_form.htm" );
+ res.sendFile( __dirname + "/" + "public" + "/" + "html" + "/" + "01_form.htm" );
 })
 
 /* on utilise le module «body-parser» pour traiter le formulaire transmis par POST */
@@ -27,8 +29,7 @@ console.log('la route /traiter_post')
  prenom:req.body.prenom,
  nom:req.body.nom,
  telephone:req.body.telephone,
- courriel:req.body.courriel,
- lamethode: "POST"
+ courriel:req.body.courriel
  };
 console.log(reponse);
  res.end(JSON.stringify(reponse));
