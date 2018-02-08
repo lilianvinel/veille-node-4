@@ -8,7 +8,7 @@ app.get('/formulaire', function (req, res) {
  res.sendFile( __dirname + "/public/html/01_form.htm" );
 })
 
-/*const transforme_en_tableau = (collection)=>
+const transforme_en_tableau = (collection)=>
 {
    let chaine = '<table>';
    for (let elm of collection)
@@ -20,7 +20,7 @@ app.get('/formulaire', function (req, res) {
       }
    }
    chaine = chaine+ '</table>';
-}*/
+}
 
 /* La route /membres permet d'afficher l'ensemble des adresses */ 
 
