@@ -32,7 +32,7 @@ app.get('/membres', (req, res) => {
         let resultat = JSON.parse(data);           
   		res.render('template_0.ejs', {adresses: resultat});
 
- 		//res.end(transforme_en_tableau(resultat));   
+ 		res.end(transforme_en_tableau(resultat));   
   });
 })
 
