@@ -8,15 +8,31 @@ app.get('/formulaire', function (req, res) {
  res.sendFile( __dirname + "/public/html/01_form.htm" );
 })
 
+/*const transforme_en_tableau = (collection)=>
+{
+   let chaine = '<table>';
+   for (let elm of collection)
+   {
+
+      for (let p in elm)
+      {
+
+      }
+   }
+   chaine = chaine+ '</table>';
+}*/
+
 /* La route /membres permet d'afficher l'ensemble des adresses */ 
 
 app.get('/membres', (req, res) => { 
-    fs.readFile( __dirname + "/public/data/" + "adresses.json", 
+    fs.readFile( __dirname + "/public/data/" + "membres.txt", 
         'utf8',
         (err, data) => {if (err) { return console.error(err);}
         console.log( data );
         let resultat = JSON.parse(data);           
-  res.render('template_0.ejs', {adresses: resultat})  
+  		res.render('template_0.ejs', {adresses: resultat});
+
+ 		//res.end(transforme_en_tableau(resultat));   
   });
 })
 
@@ -39,16 +55,21 @@ app.post('/formulaire', urlencodedParser, function (req, res) {
  // Preparer l'output en format JSON
 
 console.log('la route /formulaire')
-
 // on utilise l'objet req.body pour récupérer les données POST
- reponse = {
+ let reponse = {
  prenom:req.body.prenom,
  nom:req.body.nom,
  telephone:req.body.telephone,
  courriel:req.body.courriel
  };
 console.log(reponse);
- res.end(JSON.stringify(reponse));
+res.end(JSON.stringify(reponse));
+
+fs.appendFile( __dirname + "/public/data/" + "membres.txt", ","+JSON.stringify(reponse), function (err,data) {
+  if (err) throw err;
+  console.log('Sauvegardé');
+})  
+
 })
 
 var server = app.listen(8081, function () {
