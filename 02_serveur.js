@@ -29,7 +29,7 @@ app.get('/membres', (req, res) => {
         'utf8',
         (err, data) => {if (err) { return console.error(err);}
         console.log( data );
-        let resultat = JSON.parse(data);           
+        let resultat = JSON.parse('['+ data + ']');           
   		res.render('template_0.ejs', {adresses: resultat});
 
  		res.end(transforme_en_tableau(resultat));   
